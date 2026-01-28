@@ -8,6 +8,10 @@ app.get('/her', (req, res) => {
     `);
 });
 
+app.get('/', (req, res) => {
+    res.redirect('/deltagere-1');
+});
+
 app.get('/deltagere-1', (req, res) => {
     res.send(`
         <h1>Elever i klassen</h1>
