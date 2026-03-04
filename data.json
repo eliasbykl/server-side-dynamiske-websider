@@ -1,0 +1,10 @@
+{
+    "melding": "Dette er en JSON-fil!",
+    "status": "suksess",
+    "data": [
+        1,
+        2,
+        3,
+        4
+    ]
+}

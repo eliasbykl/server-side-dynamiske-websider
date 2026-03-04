@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skuespillere og filmer</title>
+</head>
+
+<body>
+    <h1>Skuespillere og filmer</h1>
+    <p>Laster data fra serveren...</p>
+    <ul id="liste"></ul>
+
+    <script>
+        fetch('/skuespillere-og-filmer-json')
+            .then(res => res.json())
+            .then(data => {
+                const liste = document.getElementById('liste');
+                document.querySelector('p').remove();
+                for (const rad of data) {
+                    const li = document.createElement('li');
+                    li.textContent = `${rad.skuespiller} — ${rad.film}`;
+                    liste.appendChild(li);
+                }
+            })
+            .catch(err => {
+                document.querySelector('p').textContent = 'Feil ved lasting av data.';
+                console.error(err);
+            });
+    </script>
+</body>
+
+</html>

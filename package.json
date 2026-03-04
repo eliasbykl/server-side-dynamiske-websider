@@ -15,9 +15,12 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "serve": "node index.js"
-    },
+    "serve": "node index.js",
+    "dev": "nodemon index.js"
+  },
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14",
+    "sqlite-sync": "^0.3.9"
   }
 }
