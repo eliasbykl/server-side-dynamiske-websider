@@ -4,36 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deltagere</title>
+    <title>Skuespillere</title>
 </head>
 
 <body>
-    <h1>Deltagere</h1>
+    <h1>Skuespillere</h1>
     <ul id="liste"></ul>
 
-    <h2>Legg til ny deltager</h2>
-    <input type="text" id="navn" placeholder="Navn på ny deltager">
+    <h2>Legg til ny skuespiller</h2>
+    <input type="text" id="navn" placeholder="Navn på ny skuespiller">
     <button onclick="sendData()">Legg til</button>
 
     <script>
         function hentData() {
-            fetch('/deltagere-json')
+            fetch('/skuespillere-json')
                 .then(res => res.json())
                 .then(data => {
                     const liste = document.getElementById('liste');
                     liste.innerHTML = '';
-                    for (const deltager of data) {
+                    for (const skuespiller of data) {
                         const li = document.createElement('li');
-                        li.textContent = deltager.navn;
+                        li.textContent = skuespiller.navn;
                         liste.appendChild(li);
                     }
                 })
-                .catch(err => console.error('Feil ved henting av deltagere:', err));
+                .catch(err => console.error('Feil ved henting av skuespillere:', err));
         }
 
         function sendData() {
             const navn = document.getElementById('navn').value;
-            fetch('/legg-til-deltager', {
+            fetch('/legg-til-skuespiller', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ navn: navn })
@@ -47,7 +47,7 @@
                 .catch(err => console.error('Feil ved sending av data:', err));
         }
 
-        // Last inn deltagere når siden åpnes
+        // Last inn skuespillere når siden åpnes
         hentData();
     </script>
 </body>

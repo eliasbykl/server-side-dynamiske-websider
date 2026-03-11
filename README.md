@@ -51,14 +51,15 @@ Henter bilmerker fra databasen og returnerer dem som JSON.
 
 ---
 
-### Oppgave 3 – Statiske filer fra `public/`-mappen
+### Oppgave 3 – Statiske filer og dynamiske funksjoner (AJAX/Fetch)
 
-Express serverer alt i `public/`-mappen automatisk med `express.static`.
+Sider som henter og sender data dynamisk til API-et, uten at siden laster på nytt. Filene serveres fra `public/`-mappen ved hjelp av `express.static`.
 
-| URL | Fil |
-|-----|-----|
-| [/deltagere.html](http://localhost:3000/deltagere.html) | `public/deltagere.html` |
-| [/skuespillere-og-filmer.html](http://localhost:3000/skuespillere-og-filmer.html) | `public/skuespillere-og-filmer.html` |
+| URL | Funksjon |
+|-----|----------|
+| [/deltagere.html](http://localhost:3000/deltagere.html) | Registrere og vise deltagere dynamisk mot `/deltagere-json` og `/legg-til-deltager` |
+| [/skuespillere.html](http://localhost:3000/skuespillere.html) | Registrere og vise skuespillere dynamisk mot `/skuespillere-json` og `/legg-til-skuespiller` |
+| [/skuespillere-og-filmer.html](http://localhost:3000/skuespillere-og-filmer.html) | Viser skuespillere og filmer hentet fra API-et |
 
 ---
 
@@ -76,14 +77,15 @@ Kobler skuespillere og filmer med en SQL JOIN mellom tre tabeller.
 
 ## 📁 Prosjektstruktur
 
-```
+```text
 server-side-dynamiske-websider/
-├── index.js              ← Express-serveren og alle ruter
+├── index.js              ← Express-serveren og alle API-ruter
 ├── data.json             ← JSON-fil som sendes på /json
 ├── side.html             ← HTML-fil som sendes på /html
 ├── database.db           ← SQLite-databasen (lages automatisk)
 ├── package.json
-└── public/               ← Statiske filer (servert automatisk)
+└── public/               ← Statiske filer (servert automatisk på roten /)
     ├── deltagere.html
+    ├── skuespillere.html
     └── skuespillere-og-filmer.html
 ```

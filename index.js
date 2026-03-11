@@ -4,6 +4,9 @@ const sqlite = require('sqlite-sync');
 
 const app = express();
 
+// Støtte for JSON i request body (POST)
+app.use(express.json());
+
 // Sett opp database
 sqlite.connect('database.db');
 
@@ -173,6 +176,34 @@ app.get('/skuespillere-og-filmer-json', (req, res) => {
         film: r.film || r.tittel
     }));
     res.json(mapped);
+});
+
+// GET /deltagere-json – returnerer alle deltagere (users) som JSON
+app.get('/deltagere-json', (req, res) => {
+    const users = sqlite.run('SELECT * FROM users');
+    res.json(users);
+});
+
+// POST /legg-til-deltager – lagrer en ny deltager i databasen
+app.post('/legg-til-deltager', (req, res) => {
+    const { navn } = req.body;
+    console.log('Mottok ny deltager:', navn);
+    sqlite.run('INSERT INTO users (navn) VALUES (?)', [navn]);
+    res.json({ melding: 'Deltager lagt til', navn: navn });
+});
+
+// GET /skuespillere-json – returnerer alle skuespillere som JSON
+app.get('/skuespillere-json', (req, res) => {
+    const skuespillere = sqlite.run('SELECT * FROM skuespillere');
+    res.json(skuespillere);
+});
+
+// POST /legg-til-skuespiller – lagrer en ny skuespiller i databasen
+app.post('/legg-til-skuespiller', (req, res) => {
+    const { navn } = req.body;
+    console.log('Mottok ny skuespiller:', navn);
+    sqlite.run('INSERT INTO skuespillere (navn) VALUES (?)', [navn]);
+    res.json({ melding: 'Skuespiller lagt til', navn: navn });
 });
 
 app.listen(3000, () => {
